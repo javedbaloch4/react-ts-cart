@@ -17,13 +17,11 @@ export function Home() {
     return (
         <>
             <ProductContext.Provider value={productQty}>
-                <h1>Hello</h1>
+                <h1>Welcome</h1>
                 <hr />
-                <strong>Product: </strong> {productQty}
-
-                <Products handleDec={handleDec} handleInc={handleInc} />
-
-                <button onClick={handleInc}>+</button>
+                
+                <p>Products coming soon... visit store for more</p>
+               
             </ProductContext.Provider>
         </>
     )

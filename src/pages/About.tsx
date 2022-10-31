@@ -7,7 +7,10 @@ type AboutProps = {
 export function About() {
     return (
         <>
-            Hello
+            <h1>About us</h1>
+            <hr />
+            
+            <p>This section is coming soon.</p>
         </>
     )
 }
