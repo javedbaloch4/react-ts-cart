@@ -1,5 +1,8 @@
 import { Offcanvas, Button } from "react-bootstrap"
+import { CartItem } from "./CartItem"
 import { useShoppingCart } from "../context/ShoppingCartContext"
+import { formatCurrency } from "../utils/formatCurrency"
+import storeItems from "../data/items.json"
 
 type ShoppingCartProps = {
     isOpen: boolean
@@ -7,7 +10,7 @@ type ShoppingCartProps = {
 
 export function ShoppingCart({isOpen}: ShoppingCartProps) {
 
-    const {closeCart} = useShoppingCart()
+    const {closeCart, cartItems} = useShoppingCart()
 
     return( 
         <>
@@ -16,8 +19,18 @@ export function ShoppingCart({isOpen}: ShoppingCartProps) {
                     <Offcanvas.Title>Cart</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body>
-                        Some text as placeholder. In real life you can have the elements you
-                        have chosen. Like, text, images, lists, etc.
+                    {cartItems.map(item => (
+                        <CartItem key={item.id} {...item} />
+                    ))}
+                    <div className="ms-auto fw-bold fs-5">
+                        Total{" "}
+                            {formatCurrency(
+                            cartItems.reduce((total, cartItem) => {
+                                const item = storeItems.find(i => i.id === cartItem.id)
+                                return total + (item?.price || 0) * cartItem.quantity
+                            }, 0)
+                        )}
+                    </div>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

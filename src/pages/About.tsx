@@ -13,4 +13,4 @@ export function About() {
             <p>This section is coming soon.</p>
         </>
     )
-}
+} 
